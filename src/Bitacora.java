@@ -4,30 +4,33 @@ public class Bitacora {
 String folio, tiempo, tipo, observaciones,infantiles_curp,infantiles_nombrei,responsables_curpr,educadores_curpe ;
     public  Bitacora() {
     }
-    
-    public Bitacora(String folio, String tiempo, String tipo,
-        String observaciones, String infantiles_curp, String infantiles_nombrei,
-        String responsables_curpr, String educadores_curpe) {
+
+    public Bitacora(String folio, String tiempo, String tipo, String observaciones, String infantiles_curp, String infantiles_nombrei, String responsables_curpr, String educadores_curpe) {
         this.folio = folio;
         this.tiempo = tiempo;
         this.tipo = tipo;
         this.observaciones = observaciones;
-
+        this.infantiles_curp = infantiles_curp;
+        this.infantiles_nombrei = infantiles_nombrei;
+        this.responsables_curpr = responsables_curpr;
+        this.educadores_curpe = educadores_curpe;
     }
+    
+ 
 
      public int insertar(Connection con){
       int resultado = 0;
       try {
-          String sql = "INSERT INTO bitacora VALUES(?,?,?,?,?,?,?)";
+          String sql = "INSERT INTO bitacora VALUES(?,?,?,?,?,?,?,?)";
           PreparedStatement ps= con.prepareStatement(sql);
           ps.setString(1, folio);
           ps.setString(2, tiempo);
           ps.setString(3, tipo);
           ps.setString(4, observaciones);
-          ps.setString(4, infantiles_curp);
-          ps.setString(5, infantiles_nombrei);
-          ps.setString(6, responsables_curpr);
-          ps.setString(7, educadores_curpe);
+          ps.setString(5, infantiles_curp);
+          ps.setString(6, infantiles_nombrei);
+          ps.setString(7, responsables_curpr);
+          ps.setString(8, educadores_curpe);
          
          
          return ps.executeUpdate();
@@ -40,7 +43,7 @@ String folio, tiempo, tipo, observaciones,infantiles_curp,infantiles_nombrei,res
   public int borrar(Connection con){
       int resultado = 0;
       try {
-          String sql ="DELETE FOM bitacora WHERE folio = ?";
+          String sql ="DELETE FROM bitacora WHERE folio = ?";
           PreparedStatement ps= con.prepareStatement(sql);
           ps.setString(1, folio);
           return ps.executeUpdate();

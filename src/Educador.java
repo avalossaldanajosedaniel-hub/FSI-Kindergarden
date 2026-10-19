@@ -1,0 +1,74 @@
+import java.sql.*;
+
+public class Educador {
+    static String todos = "SELECT * FROM  educadores ORDER BY nombree";
+     static String curps = "SELECT curpe FROM educadores ORDER BY curpe";
+    String curpe,nombree,sexoe,telefonoe,direccion,estadoe;
+
+    public Educador() {
+    }
+
+    public Educador(String curpe, String nombee, String sexoe, String telefonoe, String direccion, String estadoe) {
+        this.curpe = curpe;
+        this.nombree = nombee;
+        this.sexoe = sexoe;
+        this.telefonoe = telefonoe;
+        this.direccion = direccion;
+        this.estadoe = estadoe;
+    }
+    public int insertar(Connection con){
+      int resultado = 0;
+      try {
+          String sql = "INSERT INTO educadores VALUES(?,?,?,?,?,?)";
+          PreparedStatement ps= con.prepareStatement(sql);
+          ps.setString(1, curpe);
+          ps.setString(2, nombree);
+          ps.setString(3, sexoe);
+          ps.setString(4, telefonoe);
+          ps.setString(5, direccion);
+          ps.setString(6, estadoe);
+         
+         return ps.executeUpdate();
+      } catch (Exception e) {
+          System.out.println("Error" +e.getMessage());
+          return resultado;
+      }
+  }
+  
+  public int borrar(Connection con){
+      int resultado = 0;
+      try {
+          String sql ="DELETE FOM educadores WHERE curpe = ?";
+          PreparedStatement ps= con.prepareStatement(sql);
+          ps.setString(1, curpe);
+          return ps.executeUpdate();
+         
+      } catch (Exception e) {
+           System.out.println("Error:" +e.getMessage());
+           return resultado;
+      }
+      
+  }
+  
+  public int actualiza(Connection con){
+      int resultado = 0;
+      try {
+          String  sql = "UPDATE educadores SET nombree=?, sexoe=?, telefonoe=?,direccion=?, estadoe=? WHERE curpe =?";
+          PreparedStatement ps = con.prepareStatement(sql);
+         
+          
+          ps.setString(1, nombree);
+          ps.setString(2, sexoe);
+          ps.setString(3, telefonoe);
+          ps.setString(4, direccion);
+          ps.setString(5, estadoe);
+          ps.setString(6, curpe);
+          
+          return ps.executeUpdate();
+      } catch (Exception e) {
+           System.out.println("Error:" +e.getMessage());
+           return resultado;
+      }
+ }
+    
+}
